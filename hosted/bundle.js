@@ -53,85 +53,69 @@ const GameForm = (props) => {
             <input className="makeGameSubmit" type="submit" value="Make Game" />
         </form>
     );
-};*/
+};
 
-var PlayerList = function PlayerList(props) {
-    if (props.players.length === 0) {
-        return React.createElement(
-            "div",
-            { className: "playerList" },
-            React.createElement(
-                "h3",
-                { className: "emptyPlayerList" },
-                "No Players In Game"
-            )
+const PlayerList = function(props){
+    if(props.players.length === 0){
+        return (
+            <div className="playerList">
+                <h3 className="emptyPlayerList">No Players In Game</h3>
+            </div>
         );
     }
 
-    var playerNodes = props.players.map(function (player) {
-        return React.createElement(
-            "div",
-            { key: player._id, className: "player" },
-            React.createElement(
-                "h3",
-                { className: "playerName" },
-                " Name: ",
-                player.name,
-                " "
-            ),
-            React.createElement(
-                "h3",
-                { className: "playerCharacterName" },
-                " Character: ",
-                player.characterName,
-                " "
-            ),
-            React.createElement(
-                "h3",
-                { className: "playerCharacterLevel" },
-                " Level: ",
-                player.characterLevel,
-                " "
-            )
+    const playerNodes = props.players.map(function(player){
+        return (
+            <div key={player._id} className="player">
+                <h3 className="playerName"> Name: {player.name} </h3>
+                <h3 className="playerCharacterName"> Character: {player.characterName} </h3>
+                <h3 className="playerCharacterLevel"> Level: {player.characterLevel} </h3>
+            </div>
         );
     });
 
-    return React.createElement(
-        "div",
-        { className: "playerList" },
-        playerNodes
+    return (
+        <div className="playerList">
+            {playerNodes}
+        </div>
     );
 };
 
-var addPlayersToGame = function addPlayersToGame() {
+const addPlayersToGame = () => {
     // Have joining players make a POST request to add them to the game
 
-    /*sendAjax('GET', '/getGames', null, (data) => {
+    sendAjax('GET', '/getGames', null, (data) => {
         ReactDOM.render(
             <PlayerList games={data.games} />, document.querySelector("#games")
         );
-    });*/
+    });
 };
 
-var setup = function setup(csrf) {
-    ReactDOM.render(React.createElement(GameForm, { csrf: csrf }), document.querySelector("#makeGame"));
+const setup = function(csrf) {
+    ReactDOM.render(
+        <GameForm csrf={csrf} />, document.querySelector("#makeGame")
+    );
 
-    ReactDOM.render(React.createElement(GameForm, { csrf: csrf }), document.querySelector("#makeGame"));
+    ReactDOM.render(
+        <GameForm csrf={csrf} />, document.querySelector("#makeGame")
+    );
 
-    ReactDOM.render(React.createElement(GameList, { games: [] }), document.querySelector("#games"));
+    ReactDOM.render(
+        <GameList games={[]} />, document.querySelector("#games")
+    );
 
     loadGamesFromServer();
 };
 
-var getToken = function getToken() {
-    sendAjax('GET', '/getToken', null, function (result) {
+const getToken = () => {
+    sendAjax('GET', '/getToken', null, (result) => {
         setup(result.csrfToken);
     });
 };
 
-$(document).ready(function () {
+$(document).ready(function(){
     getToken();
-});
+});*/
 "use strict";
 
 var handleCharacter = function handleCharacter(e) {
@@ -291,6 +275,9 @@ var loadCharactersFromServer = function loadCharactersFromServer() {
 };
 
 var setup = function setup(csrf) {
+    // Make different UI for player and GM
+    // Maybe use session.account.accountType if that's available
+
     ReactDOM.render(React.createElement(CharacterForm, { csrf: csrf }), document.querySelector("#makeCharacter"));
 
     ReactDOM.render(React.createElement(GameForm, { csrf: csrf }), document.querySelector("#makeGame"));

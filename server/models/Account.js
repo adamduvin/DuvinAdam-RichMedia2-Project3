@@ -24,8 +24,8 @@ const AccountSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  isGM: {
-    type: Boolean,
+  accountType: {
+    type: String,
     required: true,
   },
   createdDate: {

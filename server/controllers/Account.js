@@ -69,7 +69,13 @@ const signup = (request, response) => {
 
     savePromise.then(() => {
       req.session.account = Account.AccountModel.toAPI(newAccount);
-      return res.json({ redirect: accountData.accountType });
+      console.dir(req.body.accountType);
+
+      if(req.body.accountType == 'player'){
+        return res.json({ redirect: '/player' });
+      }
+      
+      return res.json({ redirect: '/gm' });
     });
 
     savePromise.catch((err) => {

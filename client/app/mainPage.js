@@ -120,6 +120,9 @@ const loadCharactersFromServer = () => {
 };
 
 const setup = function(csrf) {
+    // Make different UI for player and GM
+    // Maybe use session.account.accountType if that's available
+
     ReactDOM.render(
         <CharacterForm csrf={csrf} />, document.querySelector("#makeCharacter")
     );

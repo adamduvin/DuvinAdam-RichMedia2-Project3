@@ -22,13 +22,13 @@ var handleSignup = function handleSignup(e) {
 
     $("#domoMessage").animate({ width: 'hide' }, 350);
 
-    if ($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '') {
-        handleError("RAWR! All fields are required");
+    if ($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '' || $("#accountType") == '') {
+        handleError("All fields are required");
         return false;
     }
 
     if ($("#pass").val() !== $("#pass2").val()) {
-        handleError("RAWR! Passwords do not match");
+        handleError("Passwords do not match");
         return false;
     }
 
@@ -118,7 +118,7 @@ var SignupWindow = function SignupWindow(props) {
         ),
         React.createElement(
             "select",
-            { id: "accountType", name: "type", placeholder: "account type" },
+            { id: "accountType", name: "accountType", placeholder: "account type" },
             React.createElement(
                 "option",
                 { value: "player" },

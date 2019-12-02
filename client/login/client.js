@@ -20,13 +20,13 @@ const handleSignup = (e) => {
 
     $("#domoMessage").animate({width:'hide'},350);
 
-    if($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == ''){
-        handleError("RAWR! All fields are required");
+    if($("#user").val() == '' || $("#pass").val() == '' || $("#pass2").val() == '' || $("#accountType") == ''){
+        handleError("All fields are required");
         return false;
     }
 
     if($("#pass").val() !== $("#pass2").val()){
-        handleError("RAWR! Passwords do not match");
+        handleError("Passwords do not match");
         return false;
     }
 
@@ -75,7 +75,7 @@ const SignupWindow = (props) => {
             <label htmlFor="pass2">Password: </label>
             <input id="pass2" type="password" name="pass2" placeholder="retype password"/>
             <label htmlFor="pass">Account Type: </label>
-            <select id="accountType" name="type" placeholder="account type">
+            <select id="accountType" name="accountType" placeholder="account type">
                 <option value="player">Player</option>
                 <option value="gm">Game Master</option>
             </select>

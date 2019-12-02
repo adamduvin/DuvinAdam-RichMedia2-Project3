@@ -53,7 +53,7 @@ const GameForm = (props) => {
             <input className="makeGameSubmit" type="submit" value="Make Game" />
         </form>
     );
-};*/
+};
 
 const PlayerList = function(props){
     if(props.players.length === 0){
@@ -84,11 +84,11 @@ const PlayerList = function(props){
 const addPlayersToGame = () => {
     // Have joining players make a POST request to add them to the game
 
-    /*sendAjax('GET', '/getGames', null, (data) => {
+    sendAjax('GET', '/getGames', null, (data) => {
         ReactDOM.render(
             <PlayerList games={data.games} />, document.querySelector("#games")
         );
-    });*/
+    });
 };
 
 const setup = function(csrf) {
@@ -115,4 +115,4 @@ const getToken = () => {
 
 $(document).ready(function(){
     getToken();
-});
+});*/
