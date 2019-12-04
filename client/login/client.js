@@ -8,7 +8,7 @@ const handleLogin = (e) => {
         return false;
     }
 
-    console.log($("input[name=_csrf]").val());
+    console.log($("input[name=_csrf]").val() + " Test");
 
     sendAjax('POST', $("#loginForm").attr("action"), $("#loginForm").serialize(), redirect);
 
@@ -49,7 +49,7 @@ const LoginWindow = (props) => {
             <label htmlFor="pass">Password: </label>
             <input id="pass" type="password" name="pass" placeholder="password"/>
             <label htmlFor="pass">Account Type: </label>
-            <select id="accountType" name="type" placeholder="account type">
+            <select id="accountType" name="accountType" placeholder="account type">
                 <option value="player">Player</option>
                 <option value="gm">Game Master</option>
             </select>

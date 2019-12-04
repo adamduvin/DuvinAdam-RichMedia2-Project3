@@ -10,7 +10,7 @@ var handleLogin = function handleLogin(e) {
         return false;
     }
 
-    console.log($("input[name=_csrf]").val());
+    console.log($("input[name=_csrf]").val() + " Test");
 
     sendAjax('POST', $("#loginForm").attr("action"), $("#loginForm").serialize(), redirect);
 
@@ -66,7 +66,7 @@ var LoginWindow = function LoginWindow(props) {
         ),
         React.createElement(
             "select",
-            { id: "accountType", name: "type", placeholder: "account type" },
+            { id: "accountType", name: "accountType", placeholder: "account type" },
             React.createElement(
                 "option",
                 { value: "player" },

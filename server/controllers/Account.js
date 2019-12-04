@@ -15,6 +15,8 @@ const login = (request, response) => {
   const req = request;
   const res = response;
 
+  console.log(req.body.accountType);
+
   const username = `${req.body.username}`;
   const password = `${req.body.pass}`;
   const accountType = `${req.body.accountType}`;

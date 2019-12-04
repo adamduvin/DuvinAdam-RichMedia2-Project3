@@ -58,7 +58,11 @@ AccountSchema.statics.findByUsername = (name, type, callback) => {
     accountType: type,
   };
 
-  return AccountModel.findOne(search, callback);
+  const account = AccountModel.findOne(search, callback);
+
+  //console.log(search.accountType);
+
+  return account; //AccountModel.findOne(search, callback);
 };
 
 AccountSchema.statics.generateHash = (password, callback) => {
