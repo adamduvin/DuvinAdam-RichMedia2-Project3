@@ -14,13 +14,15 @@ const gamePage = (req, res) => {
 };
 
 const makeGame = (req, res) => {
-  if (!req.body.gameName /*|| !req.body.password*/) {
+  if (!req.body.gameName /* || !req.body.password*/) {
     return res.status(400).json({ error: 'Name required' });
   }
 
   const gameData = {
     name: req.body.gameName,
-    //owner: req.session.account._id,
+    gm: req.body.gm,
+    players: req.body.players,
+    owner: req.session.account._id,
   };
 
   const newGame = new Game.GameModel(gameData);
@@ -45,7 +47,7 @@ const getGames = (request, response) => {
   const req = request;
   const res = response;
 
-  return Game.GameModel.findByGameName(req.session.account._id, (err, docs) => {
+  return Game.GameModel.findByOwner(req.session.account._id, (err, docs) => {
     if (err) {
       console.log(err);
       return res.status(400).json({ error: 'An error occurred' });

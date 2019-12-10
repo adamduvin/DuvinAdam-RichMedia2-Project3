@@ -9,7 +9,7 @@ const requiresLogin = (req, res, next) => {
 
 const requiresLogout = (req, res, next) => {
   if (req.session.account || req.session.accountGM) {
-    return res.redirect('/player'); //Change this later based on account type
+    return res.redirect('/player'); // Change this later based on account type
   }
 
   return next();

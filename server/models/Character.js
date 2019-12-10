@@ -15,7 +15,19 @@ const CharacterSchema = new mongoose.Schema({
     set: setName,
   },
 
+  level: {
+    type: Number,
+    min: 1,
+    required: true,
+  },
+
   class: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+
+  race: {
     type: String,
     required: true,
     trim: true,
@@ -41,7 +53,9 @@ const CharacterSchema = new mongoose.Schema({
 
 CharacterSchema.statics.toAPI = (doc) => ({
   name: doc.name,
+  level: doc.level,
   class: doc.class,
+  race: doc.race,
   maxHealth: doc.maxHealth,
 });
 
@@ -50,7 +64,7 @@ CharacterSchema.statics.findByOwner = (ownerId, callback) => {
     owner: convertId(ownerId),
   };
 
-  return CharacterModel.find(search).select('name class maxHealth').exec(callback);
+  return CharacterModel.find(search).select('name level class race maxHealth').exec(callback);
 };
 
 CharacterModel = mongoose.model('Character', CharacterSchema);

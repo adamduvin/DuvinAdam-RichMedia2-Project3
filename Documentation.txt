@@ -1,0 +1,17 @@
+Rich Media 2 Project 3 Documentation
+
+This was rough. I put a lot of time and effort into this project, and I don't think it shows and I'm pretty disappointed with it.
+
+1. This site is meant as a platform for Dungeons and Dragons Dungeon Masters and Players to collaborate and see important information in order to play remotely.
+
+2. This app was planned to have a subscription model for Dungeon Masters to pay a small fee each month to run be able to run multiple game instances and for Players to make more than 5 characters.
+
+3. I am using react to pass information between login, main, and character creation screens. There was going to be a game screen, but I ran out of time.
+
+4. I used MVC to store player and DM information on the server and pass it to the client.
+
+5. I stored accounts, characters, and game instances.
+
+6. I used Handlebars to dynamically add elements to the views.
+
+7. I did not go above and beyond.

@@ -8,26 +8,42 @@ const iterations = 10000;
 const saltLength = 64;
 const keyLength = 64;
 
+const convertId = mongoose.Types.ObjectId;
+
 const GameSchema = new mongoose.Schema({
-  gameName: {
+  name: {
     type: String,
     required: true,
     trim: true,
     unique: true,
     match: /^[A-Za-z0-9_\-.]{1,16}$/,
   },
-  salt: {
-    type: Buffer,
+
+  gm: {
+    type: String,
     required: true,
   },
-  /*password: {
+
+  /* salt: {
+    type: Buffer,
+    required: true,
+  },*/
+  /* password: {
     type: String,
     required: true,
   },*/
+
   players: {
     type: Object,
     required: true,
   },
+
+  owner: {
+    type: mongoose.Schema.ObjectId,
+    required: true,
+    ref: 'Account',
+  },
+
   createdDate: {
     type: Date,
     default: Date.now,
@@ -36,7 +52,7 @@ const GameSchema = new mongoose.Schema({
 
 GameSchema.statics.toAPI = doc => ({
   // _id is built into your mongo document and is guaranteed to be unique
-  gameName: doc.gameName,
+  name: doc.name,
   _id: doc._id,
 });
 
@@ -51,9 +67,9 @@ GameSchema.statics.toAPI = doc => ({
   });
 };*/
 
-GameSchema.statics.findByGameName = (name, callback) => {
+GameSchema.statics.findByname = (name, callback) => {
   const search = {
-    gameName: name,
+    name,
   };
 
   return GameModel.findOne(search, callback);
@@ -67,8 +83,8 @@ GameSchema.statics.generateHash = (password, callback) => {
   );
 };
 
-GameSchema.statics.authenticate = (gameName, callback) =>
-GameModel.findByGameName(gameName, (err, doc) => {
+GameSchema.statics.authenticate = (name, callback) =>
+GameModel.findByname(name, (err, doc) => {
   if (err) {
     return callback(err);
   }
@@ -87,6 +103,14 @@ GameModel.findByGameName(gameName, (err, doc) => {
     return callback();
   });*/
 });
+
+GameSchema.statics.findByOwner = (ownerId, callback) => {
+  const search = {
+    owner: convertId(ownerId),
+  };
+
+  return GameModel.find(search).select('name gm players').exec(callback);
+};
 
 GameModel = mongoose.model('Game', GameSchema);
 

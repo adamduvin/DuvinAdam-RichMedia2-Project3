@@ -16,8 +16,8 @@ const PlayerSchema = new mongoose.Schema({
   },
 
   characters: {
-      type: Object,
-      required: true,
+    type: Object,
+    required: true,
   },
 });
 
@@ -33,7 +33,7 @@ PlayerSchema.statics.findByOwner = (ownerId, callback) => {
     owner: convertId(ownerId),
   };
 
-  return PlayerModel.find(search).select('name class maxHealth').exec(callback);
+  return PlayerModel.find(search).select('name characters').exec(callback);
 };
 
 PlayerModel = mongoose.model('Player', PlayerSchema);

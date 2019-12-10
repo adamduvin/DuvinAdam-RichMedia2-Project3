@@ -32,11 +32,11 @@ const login = (request, response) => {
 
     req.session.account = Account.AccountModel.toAPI(account);
 
-    if(req.session.account.accountType == 'player'){
-      return res.json({ redirect: '/player' });
+    if (req.session.account.accountType === 'player') {
+      return res.json({ redirect: '/player', accountType: 'res.session.account.accountType' });
     }
 
-    return res.json({ redirect: '/gm' });
+    return res.json({ redirect: '/gm', accountType: 'res.session.account.accountType' });
   });
 };
 
@@ -73,10 +73,10 @@ const signup = (request, response) => {
       req.session.account = Account.AccountModel.toAPI(newAccount);
       console.dir(req.body.accountType);
 
-      if(req.body.accountType == 'player'){
+      if (req.body.accountType === 'player') {
         return res.json({ redirect: '/player' });
       }
-      
+
       return res.json({ redirect: '/gm' });
     });
 
@@ -90,6 +90,17 @@ const signup = (request, response) => {
       return res.status(400).json({ error: 'An error has occurred' });
     });
   });
+};
+
+const getAccountType = (request, response) => {
+  const req = request;
+  const res = response;
+
+  const accountTypeJSON = {
+    accountType: req.session.account.accountType,
+  };
+
+  return res.json(accountTypeJSON);
 };
 
 const getToken = (request, response) => {
@@ -108,3 +119,4 @@ module.exports.login = login;
 module.exports.logout = logout;
 module.exports.signup = signup;
 module.exports.getToken = getToken;
+module.exports.getAccountType = getAccountType;
